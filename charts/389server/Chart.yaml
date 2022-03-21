@@ -1,0 +1,6 @@
+apiVersion: v2
+name: 389server
+description: Helm chart for the 389ds server
+type: application
+version: 0.1.0
+appVersion: "2.0"
