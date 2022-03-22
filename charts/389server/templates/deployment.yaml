@@ -40,9 +40,18 @@ spec:
           {{- end }}
           {{- end }}
           ports:
-            - name: http
-              containerPort: 80
+            - name: ldap-tcp
+              containerPort: 389
               protocol: TCP
+            - name: ldap-udp
+              containerPort: 389
+              protocol: UDP
+            - name: ldaps-tcp
+              containerPort: 636
+              protocol: TCP
+            - name: ldaps-udp
+              containerPort: 636
+              protocol: UDP
           livenessProbe:
             httpGet:
               path: /
