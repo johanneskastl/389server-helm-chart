@@ -71,8 +71,28 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: LoadBalancer
+  ports:
+    ldap-tcp:
+      enabled: true
+      port: 389
+      protocol: TCP
+      targetPort: 1389
+    ldap-udp:
+      enabled: false
+      port: 389
+      protocol: UDP
+      targetPort: 1389
+    ldaps-tcp:
+      enabled: true
+      port: 636
+      protocol: TCP
+      targetPort: 1636
+    ldaps-udp:
+      enabled: false
+      port: 636
+      protocol: UDP
+      targetPort: 1636
 
 ingress:
   enabled: false
