@@ -60,20 +60,26 @@ spec:
             mountPath: '/data/tls/'
           {{- end }}
           livenessProbe:
-            tcpSocket:
-              port: 389
+            exec:
+              command:
+                - "/usr/lib/dirsrv/dscontainer"
+                - "-H"
             initialDelaySeconds: 30
             periodSeconds: 15
           readinessProbe:
-            tcpSocket:
-              port: 389
+            exec:
+              command:
+                - "/usr/lib/dirsrv/dscontainer"
+                - "-H"
             initialDelaySeconds: 30
             periodSeconds: 15
           startupProbe:
-            tcpSocket:
-              port: 389
+            exec:
+              command:
+                - "/usr/lib/dirsrv/dscontainer"
+                - "-H"
             failureThreshold: 30
-            periodSeconds: 10
+            periodSeconds: 15
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
