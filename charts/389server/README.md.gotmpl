@@ -56,7 +56,7 @@ Read through the [values.yaml](./values.yaml) file. It has several commented out
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 ```console
 helm install {{ template "chart.name" . }} \
-  --set env.TZ="America/New York" \
+  --namespace {{ template "chart.name" . }} \
     {{ template "helm.path" . }}
 ```
 {{- end -}}
