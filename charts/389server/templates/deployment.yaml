@@ -41,16 +41,16 @@ spec:
           {{- end }}
           ports:
             - name: ldap-tcp
-              containerPort: 389
+              containerPort: 3389
               protocol: TCP
             - name: ldap-udp
-              containerPort: 389
+              containerPort: 3389
               protocol: UDP
             - name: ldaps-tcp
-              containerPort: 636
+              containerPort: 3636
               protocol: TCP
             - name: ldaps-udp
-              containerPort: 636
+              containerPort: 3636
               protocol: UDP
           volumeMounts:
           - name: {{ .Release.Name }}-data
