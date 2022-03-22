@@ -77,22 +77,22 @@ service:
       enabled: true
       port: 389
       protocol: TCP
-      targetPort: 1389
+      targetPort: 3389
     ldap-udp:
       enabled: false
       port: 389
       protocol: UDP
-      targetPort: 1389
+      targetPort: 3389
     ldaps-tcp:
       enabled: true
       port: 636
       protocol: TCP
-      targetPort: 1636
+      targetPort: 3636
     ldaps-udp:
       enabled: false
       port: 636
       protocol: UDP
-      targetPort: 1636
+      targetPort: 3636
 
 ingress:
   enabled: false
