@@ -56,13 +56,20 @@ spec:
           - name: {{ .Release.Name }}-data
             mountPath: '/data/'
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            tcpSocket:
+              port: 389
+            initialDelaySeconds: 30
+            periodSeconds: 15
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            tcpSocket:
+              port: 389
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          startupProbe:
+            tcpSocket:
+              port: 389
+            failureThreshold: 30
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
