@@ -7,9 +7,13 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  {{- range $name, $content := .Values.service.ports }}
+  {{- if .enabled }}
+    - port: {{ $content.port }}
+      targetPort: {{ $content.targetPort }}
+      protocol: {{ $content.protocol }}
+      name: {{ $name }}
+  {{- end }}
+  {{- end }}
   selector:
     {{- include "389server.selectorLabels" . | nindent 4 }}
