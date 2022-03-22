@@ -6,6 +6,8 @@ metadata:
     {{- include "389server.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "389server.selectorLabels" . | nindent 6 }}
