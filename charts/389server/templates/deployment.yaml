@@ -52,6 +52,9 @@ spec:
             - name: ldaps-udp
               containerPort: 636
               protocol: UDP
+          volumeMounts:
+          - name: {{ .Release.Name }}-data
+            mountPath: '/data/'
           livenessProbe:
             httpGet:
               path: /
@@ -62,6 +65,10 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: {{ .Release.Name }}-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-data
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
