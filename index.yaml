@@ -3,6 +3,16 @@ entries:
   389server:
   - apiVersion: v2
     appVersion: "2.0"
+    created: "2022-03-22T09:19:39.811664299Z"
+    description: Helm chart for the 389ds server
+    digest: 9fcbae5158faa6db066122162d865292b8c1d649f573bc1e094d22bd066a62a4
+    name: 389server
+    type: application
+    urls:
+    - https://github.com/johanneskastl/389server-helm-chart/releases/download/389server-0.2.2/389server-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: "2.0"
     created: "2022-03-22T09:08:13.519828968Z"
     description: Helm chart for the 389ds server
     digest: f9b97d1f8df24a2b273fe202b0e82b841943ba6917411767e16fdd723fb22a73
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/johanneskastl/389server-helm-chart/releases/download/389server-0.2.0/389server-0.2.0.tgz
     version: 0.2.0
-generated: "2022-03-22T09:08:13.519836368Z"
+generated: "2022-03-22T09:19:39.8118663Z"
