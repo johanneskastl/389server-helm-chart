@@ -55,6 +55,10 @@ spec:
           volumeMounts:
           - name: {{ .Release.Name }}-data
             mountPath: '/data/'
+          {{- if .Values.tls_certificates_from_secret.enabled }}
+          - name: {{ .Release.Name }}-certs
+            mountPath: '/data/tls/'
+          {{- end }}
           livenessProbe:
             tcpSocket:
               port: 389
@@ -76,6 +80,18 @@ spec:
       - name: {{ .Release.Name }}-data
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-data
+      {{- if .Values.tls_certificates_from_secret.enabled -}}
+      {{- if .Values.tls_certificates_from_secret.generate_certificate }}
+      - name: {{ .Release.Name }}-certs
+        secret:
+          secretName: {{ .Values.tls_certificates_from_secret.certificate.secretName }}
+      {{- end }}
+      {{- if .Values.tls_certificates_from_secret.existingSecret }}
+      - name: {{ .Release.Name }}-certs
+        secret:
+          secretName: {{ .Values.tls_certificates_from_secret.existingSecret.name }}
+      {{- end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
