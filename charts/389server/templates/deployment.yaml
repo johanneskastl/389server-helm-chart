@@ -1,3 +1,6 @@
+{{- if and .Values.tls_certificates_from_secret.enabled (not .Values.tls_certificates_from_secret.generate_certificate) (not .Values.tls_certificates_from_secret.existingSecret) }}
+{{- fail "If you want to enable TLS, you either need to use an existingSecret or generate a certificate" }}
+{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
