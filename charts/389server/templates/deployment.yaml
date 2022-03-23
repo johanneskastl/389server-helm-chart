@@ -58,10 +58,6 @@ spec:
           volumeMounts:
           - name: {{ .Release.Name }}-data
             mountPath: '/data/'
-          {{- if .Values.tls_certificates_from_secret.enabled }}
-          - name: {{ .Release.Name }}-certs
-            mountPath: '/data/tls/'
-          {{- end }}
           livenessProbe:
             exec:
               command:
@@ -94,11 +90,21 @@ spec:
       - name: {{ .Release.Name }}-certs
         secret:
           secretName: {{ .Values.tls_certificates_from_secret.certificate.secretName }}
+          items:
+          - key: tls.key
+            path: /data/tls/server.key
+          - key: tls.crt
+            path: /data/tls/server.crt
       {{- end }}
       {{- if .Values.tls_certificates_from_secret.existingSecret }}
       - name: {{ .Release.Name }}-certs
         secret:
           secretName: {{ .Values.tls_certificates_from_secret.existingSecret.name }}
+          items:
+          - key: tls.key
+            path: /data/tls/server.key
+          - key: tls.crt
+            path: /data/tls/server.crt
       {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
