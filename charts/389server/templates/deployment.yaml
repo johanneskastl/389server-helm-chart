@@ -58,7 +58,7 @@ spec:
           volumeMounts:
           - name: {{ .Release.Name }}-data
             mountPath: '/data/'
-          {{ if .Values.tls_certificates_from_secret.enabled -}}
+          {{- if .Values.tls_certificates_from_secret.enabled }}
           - name: {{ .Release.Name }}-certs
             mountPath: '/data/tls/'
             readOnly: true
