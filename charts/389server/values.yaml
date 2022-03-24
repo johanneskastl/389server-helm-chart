@@ -43,6 +43,12 @@ tls_certificates_from_secret:
   #     name: my-cert-resolver
   #     kind: ClusterIssuer
   #   secretName: ldap.example.com-tls
+  #
+  # if the secret created by cert-manager does not contain a ca.crt
+  # (which is the case for e.g. Let's encrypt certificates)
+  # you need to create an additional secret containing a ca.crt key with your certificate
+  # mount_ca_secret:
+  #   existingSecret: secret-name
 
   # specify an existing secret holding the certificates
   # existingSecret:
