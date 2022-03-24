@@ -63,6 +63,11 @@ spec:
             mountPath: '/data/tls/'
             readOnly: true
           {{- end }}
+          {{- if .Values.tls_certificates_from_secret.mount_ca_secret }}
+          - name: {{ .Release.Name }}-ca
+            mountPath: '/data/tls/ca/'
+            readOnly: true
+          {{- end }}
           livenessProbe:
             exec:
               command:
@@ -100,6 +105,10 @@ spec:
             path: server.key
           - key: tls.crt
             path: server.crt
+      {{- if not .Values.tls_certificates_from_secret.mount_ca_secret }}
+          - key: ca.crt
+            path: ca/ca.crt
+      {{- end }}
       {{- end }}
       {{- if .Values.tls_certificates_from_secret.existingSecret }}
       - name: {{ .Release.Name }}-certs
@@ -110,6 +119,15 @@ spec:
             path: server.key
           - key: tls.crt
             path: server.crt
+      {{- if not .Values.tls_certificates_from_secret.mount_ca_secret }}
+          - key: ca.crt
+            path: ca/ca.crt
+      {{- end }}
+      {{- end }}
+      {{- if .Values.tls_certificates_from_secret.mount_ca_secret }}
+      - name: {{ .Release.Name }}-ca
+        secret:
+          secretName: {{ .Values.tls_certificates_from_secret.mount_ca_secret.secretName }}
       {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
