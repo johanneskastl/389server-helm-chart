@@ -2,5 +2,8 @@ apiVersion: v2
 name: 389server
 description: Helm chart for the 389ds server
 type: application
-version: 0.4.0
-appVersion: "2.0"
+version: 0.5.0
+appVersion: "2.1"
+maintainers:
+  - name: johanneskastl
+    email: kastl@b1-systems.de
