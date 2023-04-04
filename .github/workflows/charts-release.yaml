@@ -4,7 +4,7 @@ name: "Charts: Release"
 on:
   workflow_dispatch:
   push:
-    branches: 
+    branches:
       - main
     paths:
       - 'charts/**'
@@ -13,11 +13,15 @@ on:
 
 jobs:
   release:
+    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
+    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+    permissions:
+      contents: write
     if: "!contains(github.event.head_commit.message, '[ci-skip]')"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -27,11 +31,9 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v1.1
-        with:
-          version: v3.5.4
+        uses: azure/setup-helm@v3
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
+        uses: helm/chart-releaser-action@v1.5.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
