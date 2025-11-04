@@ -1,9 +1,10 @@
 apiVersion: v2
 name: 389server
-description: Helm chart for the 389ds server
+description: DEPRECATED - Helm chart for the 389ds server
 type: application
+deprecated: true
 version: 0.6.0
 appVersion: "2.2"
-maintainers:
-  - name: johanneskastl
-    email: kastl@b1-systems.de
+# maintainers:
+#   - name: johanneskastl
+#     email: git@johannes-kastl.de
